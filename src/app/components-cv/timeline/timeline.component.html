@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Mes expériences professionnels</mat-card-title>
+  </mat-card-header>
+
+
+  
+    <mat-chip-list class="w-100" aria-label="Fish selection">
+      <mat-chip  *ngFor="let xp of experiences" (click)="scrollTo(xp.societe)">{{xp.societe}}</mat-chip>
+
+    </mat-chip-list>
+
+
+
+  <section id="cd-timeline" class="cd-container">
+
+    <div class="cd-timeline-block" *ngFor="let xp of experiences">
+      <div class="cd-timeline-img cd-picture">
+      </div>
+
+      <div class="cd-timeline-content" id="{{xp.societe}}">
+        <h2>{{xp.societe}}</h2>
+        <div class="timeline-content-info">
+          <span class="timeline-content-info-title">
+            <i class="fa fa-certificate" aria-hidden="true"></i>
+            {{xp.poste}}
+          </span>
+          <span class="timeline-content-info-date">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+            {{xp.dateStart | date:"MM/yyyy"}} - {{xp.dateEnd | date:"MM/yyyy"}}
+          </span>
+        </div>
+        <div class="body">
+          <p>
+            {{xp.description}}
+          </p>
+          <div  [innerHTML]="xp.body">
+
+          </div>
+          <!-- <ul class="content-skills">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>jQuery</li>
+            <li>Wordpress</li>
+          </ul> -->
+        </div> <!-- cd-timeline-content -->
+      </div> <!-- cd-timeline-block -->
+    </div> <!-- cd-timeline-block -->
+
+
+
+  </section> <!-- cd-timeline -->
+</mat-card>

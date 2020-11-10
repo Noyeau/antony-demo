@@ -1,0 +1,17 @@
+<mat-card class="example-card" *ngIf="api">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"
+      [style.background-image]=" 'url(https://transfer.legal/wp-content/uploads/2016/12/logo-swagger.png)'"></div>
+
+    <a *ngIf="api.open" href="https://api.noyeau.io/gateway/{{api.code}}/api-docs/" target="_blank">
+      <mat-card-title>{{api.label.toUpperCase()}}</mat-card-title>
+    </a>
+    <mat-card-title *ngIf="!api.open">{{api.label.toUpperCase()}}</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{api.description}}
+    </p>
+  </mat-card-content>
+</mat-card>

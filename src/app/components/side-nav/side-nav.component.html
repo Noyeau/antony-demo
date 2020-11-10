@@ -1,0 +1,73 @@
+<mat-toolbar class="mat-elevation-z6" color="primary">
+  <button mat-icon-button (click)="opened = !opened">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Antony Noyelle</span>
+  <span class="spacer"></span>
+  <ng-content select="[header]"></ng-content>
+</mat-toolbar>
+<mat-sidenav-container class="main-sidenav-container" (backdropClick)="opened = !opened">
+  <mat-sidenav class="no-scroll" [mode]="mode" [opened]="opened" [fixedInViewport]="true" [fixedTopGap]="layoutGap">
+
+    <mat-selection-list menu [multiple]="false">
+
+      <mat-list-option value="" routerLink="/" (click)="clickMenu()">
+        <h2 matSubheader>
+          <mat-icon>home</mat-icon>
+          <span class="mx-3">Accueil</span>
+        </h2>
+      </mat-list-option>
+
+      <mat-list-option *ngFor="let elem of menuAnto" [value]="elem.label" [routerLink]="elem.url" (click)="clickMenu()">
+        <mat-icon mat-list-icon>{{elem.icon ? elem.icon : "keyboard_arrow_right"}}</mat-icon>
+        {{elem.label}}
+      </mat-list-option>
+
+
+      <mat-list-option value="projets" class="mt-3" disabled routerLink="/projets" (click)="clickMenu()">
+        <h3 matSubheader>
+          <mat-icon>engineering</mat-icon>
+          <span class="mx-3">Projets Personnels</span>
+        </h3>
+      </mat-list-option>
+
+      <mat-list-option *ngFor="let elem of menuProjets" [value]="elem.label" [routerLink]="elem.url" (click)="clickMenu()">
+        <mat-icon mat-list-icon>{{elem.icon ? elem.icon : "keyboard_arrow_right"}}</mat-icon>
+        {{elem.label}}
+      </mat-list-option>
+
+
+
+
+
+
+      <mat-list-option value="contact" routerLink="/contact" (click)="clickMenu()">
+        <h3 matSubheader>
+          <mat-icon>connect_without_contact</mat-icon>
+          <span class="mx-3">Contact</span>
+        </h3>
+      </mat-list-option>
+
+
+
+      <mat-list-option class="mt-5" value="contact" disabled routerLink="/contact">
+        <h3 matSubheader>
+          <mat-icon>link</mat-icon>
+          <span class="mx-3">Liens externes</span>
+        </h3>
+      </mat-list-option>
+      <a *ngFor="let elem of lienExterne" href="{{elem.url}}" target="_blank">
+        <mat-list-option  [value]="elem.label">
+          <mat-icon mat-list-icon>{{elem.icon ? elem.icon : "keyboard_arrow_right"}}</mat-icon>
+          {{elem.label}}
+        </mat-list-option>
+      </a>
+    </mat-selection-list>
+
+  </mat-sidenav>
+
+  <div class="div-scrollable">
+    <ng-content></ng-content>
+  </div>
+
+</mat-sidenav-container>

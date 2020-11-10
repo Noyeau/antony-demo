@@ -1,0 +1,26 @@
+<mat-card-title>Description du projet</mat-card-title>
+<div class="row my-2">
+  <div class="col-12">
+    <mat-card>
+      Noyeau est un projet à l'origine prévu pour de la domotique et qui c'est transformé un system de micros api de
+      fonctionnalité divers.
+    </mat-card>
+  </div>
+</div>
+
+<mat-card-title>Liste des applications</mat-card-title>
+<div class="row my-2">
+  <div class="col text-center mb-3" *ngFor="let app of appList">
+    <app-app-project [app]="app">
+    </app-app-project>
+  </div>
+</div>
+
+<mat-card-title>Liste des API</mat-card-title>
+<div class="row my-2">
+  <div class="col mb-3" *ngFor="let api of apiList">
+
+    <app-api-project [api]="api"></app-api-project>
+
+  </div>
+</div>

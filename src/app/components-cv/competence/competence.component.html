@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Mes compétences</mat-card-title>
+  </mat-card-header>
+  <div class="row">
+    <div class="col mt-3">
+      <mat-chip-list>
+        <mat-chip color="primary" selected> Univers du Code</mat-chip>
+      </mat-chip-list>
+      <app-rating *ngFor="let comp of code" [title]="comp.title" [note]="comp.note"></app-rating>
+    </div>
+
+    <div class="col mt-3">
+      <mat-chip-list>
+        <mat-chip color="primary" selected> Divers</mat-chip>
+      </mat-chip-list>
+      <app-rating *ngFor="let comp of autre" [title]="comp.title" [note]="comp.note"></app-rating>
+    </div>
+
+    <div class="col mt-3">
+      <mat-chip-list>
+        <mat-chip color="primary" selected> Univers de la Vidéo</mat-chip>
+      </mat-chip-list>
+      <app-rating *ngFor="let comp of video" [title]="comp.title" [note]="comp.note"></app-rating>
+    </div>
+  </div>
+
+</mat-card>

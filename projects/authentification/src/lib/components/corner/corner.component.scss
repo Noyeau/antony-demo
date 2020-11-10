@@ -1,0 +1,44 @@
+
+.fond {
+    width: 50px;
+    height:50px;
+    position: absolute;
+    display: block;
+    background-color: red;
+    z-index: 101;
+    right: 5px;
+    top:5px;
+    background-image: url("/assets/moi.jpg");
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    transition: all .5s ease-in;
+}
+
+
+img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    transition: all .5s ease-in;
+}
+.box:hover {
+    .fond {
+    width: 120px;
+    height: 50px;
+    clip-path: polygon(50% 0%, 100% 0, 100% 100%, 0 100%, 0 0);
+    }
+    .fond::after{
+        content: 'Connexion';
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    transition: all .5s ease-in;
+    }
+}
+
