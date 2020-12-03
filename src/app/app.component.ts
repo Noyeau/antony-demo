@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthentificationService } from 'projects/authentification/src/public-api';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MediasService } from 'projects/medias/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,19 @@ export class AppComponent {
   title = 'app-antony';
   constructor(
     private _authService: AuthentificationService,
-
+    private _mediasService: MediasService,
 
   ) {
 
+    this._authService.connexionState.subscribe((res) => {
+      if (res.user) {
+        this._mediasService.userId = res.user.id
+        this._mediasService.userToken = res.tokenId
+      } else {
+        this._mediasService.userId = null
+        this._mediasService.userToken = null
+      }
+    })
     this._authService.isConnectedUpdate.subscribe(connect => {
       console.log("connect", connect)
 
@@ -33,11 +43,11 @@ export class AppComponent {
 
 
 
-shareOk(){
-  return("share" in navigator)
-}
+  shareOk() {
+    return ("share" in navigator)
+  }
 
-  share(){
+  share() {
     let data = {
       title: 'Systèm inovant',
       text: "Noyeau.io est un system de multiple api qui forment un moyau d'applications",
@@ -50,8 +60,13 @@ shareOk(){
     }
 
     window.navigator['share'](data)
-    .then(() => console.log('Successful share'))
-    .catch(error => console.log('Error sharing:', error));
+      .then(() => console.log('Successful share'))
+      .catch(error => console.log('Error sharing:', error));
+  }
+
+
+  test(title, value){
+    console.log(title, value)
   }
 
 }

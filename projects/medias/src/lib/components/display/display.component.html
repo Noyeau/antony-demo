@@ -1,0 +1,14 @@
+<ng-container *ngIf="userFile">
+
+  <ng-container *ngIf="userFile.type.includes('image') || size == 'thum'">
+    <img [src]="getUrl()" style="width: 100%;height: auto;">
+  </ng-container>
+
+  <ng-container *ngIf="userFile.type.includes('video') && size != 'thum'">
+    <video controls style="width: 100%;height: auto;">
+      <source [src]="getUrl()" [type]="userFile.type">
+      Sorry, your browser doesn't support embedded videos.
+    </video>
+  </ng-container>
+
+</ng-container>

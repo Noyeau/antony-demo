@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'noy-corner',
+  selector: 'noyeau-auth-corner',
   templateUrl: './corner.component.html',
   styleUrls: ['./corner.component.scss']
 })
-export class CornerComponent implements OnInit {
+export class NoyeauCornerComponent implements OnInit {
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-<noy-corner></noy-corner>
+<!-- <noyeau-auth-corner></noyeau-auth-corner> -->
 <app-side-nav>
   <button header (click)="share()" *ngIf="shareOk()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
     <mat-icon  >share</mat-icon>
@@ -6,6 +6,16 @@
 
 
   <div class="container-fluid my-3">
+
+    <div>
+      <app-medias-upload (onUpdate)="test('onUpdate', $event)" (onFinish)="test('onFinish', $event)"></app-medias-upload>
+
+      <noy-medias-list [myFiles]="true">
+
+      </noy-medias-list>
+
+
+    </div>
     <router-outlet></router-outlet>
   </div>
 </app-side-nav>

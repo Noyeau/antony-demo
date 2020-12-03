@@ -18,6 +18,7 @@ import { AppProjectComponent } from './components-projet/app-project/app-project
 import { ApiProjectComponent } from './components-projet/api-project/api-project.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { DiversProjectsComponent } from './pages/divers-projects/divers-projects.component';
+import { MediasModule, DisplayComponent } from 'projects/medias/src/public-api';
 
 
 @NgModule({
@@ -34,14 +35,15 @@ import { DiversProjectsComponent } from './pages/divers-projects/divers-projects
     AppProjectComponent,
     ApiProjectComponent,
     ProjectsComponent,
-    DiversProjectsComponent
+    DiversProjectsComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AuthentificationModule,
-    MaterialModule
+    MaterialModule,
+    MediasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

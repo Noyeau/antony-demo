@@ -1,0 +1,22 @@
+<label for="file">Choose File</label>
+<input type="file" id="file" class="inputfile" multiple (change)="handleFileInput($event.target.files)">
+
+
+
+<ul>
+  <li *ngFor="let file of fileToUploads">
+    {{file.name}} 
+    <ng-container *ngIf="file.transfertStatus == 'sending'">
+      <app-loader [width]="'40px'"></app-loader>
+    </ng-container>
+    <ng-container *ngIf="file.transfertStatus == 'ok'">
+      <img src="https://image.flaticon.com/icons/png/512/66/66936.png" alt="Check mark Free Icon" width="30"
+        height="30">
+    </ng-container>
+    <ng-container *ngIf="file.transfertStatus == 'error'">
+      <img src="https://image.flaticon.com/icons/png/512/8/8809.png" width="30" height="30"
+        alt="Exclamation mark inside an octahedron Free Icon">
+    </ng-container>
+
+  </li>
+</ul>

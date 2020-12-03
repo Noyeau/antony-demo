@@ -1,0 +1,10 @@
+
+<app-medias-space *ngIf="myFiles"></app-medias-space>
+<div class="flex-container">
+  <ng-container *ngFor="let userFile of userFiles; let i = index">
+    <div class="thumb" [ngStyle]="{'background-image': 'url(' + getThumb(userFile) + ')'}" (click)="openInNewTab(userFile)">
+  
+    </div>
+  <!-- <app-display [userFile]="userFile" [size]="'thum'" (click)="selected= userFile"></app-display> -->
+  </ng-container>
+</div>

@@ -19,6 +19,10 @@
       "authentification": [
         "dist/authentification/authentification",
         "dist/authentification"
+      ],
+      "medias": [
+        "dist/medias/medias",
+        "dist/medias"
       ]
     }
   }

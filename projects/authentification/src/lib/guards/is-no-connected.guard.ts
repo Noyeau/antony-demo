@@ -6,7 +6,7 @@ import { NoyeauAuthService } from '../authentification.service';
 @Injectable({
   providedIn: 'root'
 })
-export class IsConnectedGuard implements CanActivate {
+export class IsNoConnectedGuard implements CanActivate {
   constructor(
     private _authService: NoyeauAuthService
   ) {
@@ -15,9 +15,9 @@ export class IsConnectedGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean | UrlTree> {
     if (await this._authService.isConnected()) {
-      return true
-    } else {
       return false
+    } else {
+      return true
     }
   }
 

@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { AuthentificationComponent } from './authentification.component';
-import { HttpInterceptorProviders } from './http-interceptor';
+import { NoyeauHttpInterceptorProviders } from './http-interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
-import { CornerComponent } from './components/corner/corner.component';
+import { NoyeauCornerComponent } from './components/corner/corner.component';
 
 
 
 @NgModule({
-  declarations: [CornerComponent],
+  declarations: [NoyeauCornerComponent],
   imports: [
     HttpClientModule
   ],
-  providers: [HttpInterceptorProviders, CookieService],
-  exports: [CornerComponent]
+  providers: [NoyeauHttpInterceptorProviders, CookieService],
+  exports: [NoyeauCornerComponent]
 })
 export class AuthentificationModule { }

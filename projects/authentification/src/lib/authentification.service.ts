@@ -1,22 +1,32 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {CookieService} from 'ngx-cookie-service';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 const helper: JwtHelperService = new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthentificationService {
+export class NoyeauAuthService {
+
+
+
+
+
   compteMultiple: any[] = [];
   accountSelected: string;
 
   cookieDomaine = this.getDomainName(window.location.hostname); // "noyeau.io"
 
   set tokenId(value) {
+    this.connexionState.next({
+      user: this.userConnected,
+      tokenId: value
+    })
     if (!value) {
       this.cookieService.set('tokenId', '', new Date(150000), '/', this.cookieDomaine);
       return;
@@ -33,7 +43,6 @@ export class AuthentificationService {
     let rep;
 
     rep = this.cookieService.get('tokenId');
-
     if (!rep && this.userConnected) {
       let key = 'tokenId-' + this.userConnected.username;
       rep = this.cookieService.get(key);
@@ -50,7 +59,7 @@ export class AuthentificationService {
             if (!this.compteMultiple.includes(username)) {
               this.compteMultiple.push(username);
             }
-            results.push({key: i, val: allCookie[i]});
+            results.push({ key: i, val: allCookie[i] });
           }
         }
       }
@@ -94,7 +103,7 @@ export class AuthentificationService {
       for (i in allCookie) {
         if (allCookie.hasOwnProperty(i)) {
           if (i.includes('refreshToken-')) {
-            results.push({key: i, val: allCookie[i]});
+            results.push({ key: i, val: allCookie[i] });
           }
         }
       }
@@ -121,14 +130,24 @@ export class AuthentificationService {
     return this.cookieService.get(key);
   }
 
-  public userConnected: any;
+  public userConnected: any = null;
   isConnectedUpdate: EventEmitter<boolean> = new EventEmitter();
+  connexionUpdate: EventEmitter<any> = new EventEmitter();
+
+
+
+  connexionState: BehaviorSubject<{user:any, tokenId:string}> = new BehaviorSubject({
+    user: this.userConnected,
+    tokenId: this.tokenId
+  })
+
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
   ) {
+
   }
 
   async getAccount(): Promise<any> {
@@ -141,7 +160,7 @@ export class AuthentificationService {
         this.cookieService.set('refreshToken', '', new Date(150000), '/', this.cookieDomaine);
 
         // await this._movieService.init();
-          resolve(true);
+        resolve(true);
       }, err => {
         reject(err);
       });
@@ -162,11 +181,11 @@ export class AuthentificationService {
         console.log(1);
 
         this.getAccount().then(() => {
-        this.isConnectedUpdate.emit(true);
+          this.isConnectedUpdate.emit(true);
 
           resolve(true);
         }, () => {
-        this.isConnectedUpdate.emit(false);
+          this.isConnectedUpdate.emit(false);
 
           resolve(false);
         });
@@ -174,16 +193,16 @@ export class AuthentificationService {
         console.log(2);
         this.refreshTockenApi().then(() => {
           this.getAccount().then(() => {
-        this.isConnectedUpdate.emit(true);
+            this.isConnectedUpdate.emit(true);
 
             resolve(true);
           }, () => {
-        this.isConnectedUpdate.emit(false);
+            this.isConnectedUpdate.emit(false);
 
             resolve(false);
           });
         }, err => {
-        this.isConnectedUpdate.emit(false);
+          this.isConnectedUpdate.emit(false);
 
           resolve(false);
         });
